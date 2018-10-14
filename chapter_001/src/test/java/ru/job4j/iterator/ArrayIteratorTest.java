@@ -7,11 +7,12 @@ public class ArrayIteratorTest {
 
     @Test
     public void whenHasNextFalse() {
-        int[][] givenArray = {{1, 2}, {4}};
+        int[][] givenArray = {{1, 2}, {4, 5}};
         ArrayIterator arr = new ArrayIterator(givenArray);
         arr.next();
         arr.next();
         arr.next();
+        System.out.println(arr.next());
         boolean result = arr.hasNext();
         assertThat(result, is(false));
     }
@@ -36,6 +37,14 @@ public class ArrayIteratorTest {
         arr.next();
         int result = arr.next();
         assertThat(result, is(6));
+
+    }
+    @Test
+    public void whenNullArray() {
+        int[][] givenArray = {};
+        ArrayIterator arr = new ArrayIterator(givenArray);
+        int result = arr.next();
+        assertThat(result, is(-1));
 
     }
 }

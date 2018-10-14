@@ -9,22 +9,32 @@ import java.util.stream.Stream;
 
 public class ArrayIterator implements Iterator {
     private int[][] array;
-    private int index;
-    List<Integer> listOfArray;
+    private int inIndex;
+    private int outIndex;
 
     public ArrayIterator(int[][] givenArr) {
         array = givenArr;
-        index = 0;
-        listOfArray = Stream.of(array).flatMapToInt(x -> Arrays.stream(x)).boxed().collect(Collectors.toList());
+        inIndex = 0;
+        outIndex = 0;
     }
 
     @Override
     public boolean hasNext() {
-        return listOfArray.size() > index;
+        return array[outIndex].length > inIndex;
     }
 
     @Override
     public Integer next() {
-        return listOfArray.get(index++);
+        Integer result;
+        if (array.length == 0) {
+            return -1;
+        } else if (inIndex < array[outIndex].length) {
+
+        } else if (outIndex < array.length) {
+            ++outIndex;
+            inIndex = 0;
+        }
+        result = array[outIndex][inIndex++];
+        return result;
     }
 }
