@@ -4,6 +4,7 @@ import com.sun.istack.internal.NotNull;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -20,21 +21,17 @@ public class ArrayIterator implements Iterator {
 
     @Override
     public boolean hasNext() {
-        return array[outIndex].length > inIndex;
+        return !(outIndex >= array.length - 1 && inIndex >= array[outIndex].length);
     }
 
     @Override
     public Integer next() {
-        Integer result;
-        if (array.length == 0) {
-            return -1;
-        } else if (inIndex < array[outIndex].length) {
-
-        } else if (outIndex < array.length) {
+        if (!hasNext()) {
+            throw new NoSuchElementException();
+        } else if (!(inIndex < array[outIndex].length)) {
             ++outIndex;
             inIndex = 0;
         }
-        result = array[outIndex][inIndex++];
-        return result;
+        return array[outIndex][inIndex++];
     }
 }

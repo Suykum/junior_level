@@ -39,12 +39,4 @@ public class ArrayIteratorTest {
         assertThat(result, is(6));
 
     }
-    @Test
-    public void whenNullArray() {
-        int[][] givenArray = {};
-        ArrayIterator arr = new ArrayIterator(givenArray);
-        int result = arr.next();
-        assertThat(result, is(-1));
-
-    }
 }
