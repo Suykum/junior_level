@@ -1,12 +1,6 @@
 package ru.job4j.iterator;
-import com.sun.istack.internal.NotNull;
-
-import java.util.Arrays;
 import java.util.Iterator;
-import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class ArrayIterator implements Iterator {
     private int[][] array;
