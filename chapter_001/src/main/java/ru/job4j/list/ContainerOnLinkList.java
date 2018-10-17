@@ -36,6 +36,10 @@ public class ContainerOnLinkList<E> implements Iterable<E> {
         return temp.date;
     }
 
+    public boolean isEmpty() {
+        return first == null;
+    }
+
     /**
      * Класс предназначен для хранения данных.
      */
