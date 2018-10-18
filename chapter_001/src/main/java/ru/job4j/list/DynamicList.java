@@ -18,7 +18,8 @@ public class DynamicList<T> implements Iterable<T> {
     }
 
     public void growSize() {
-            container = Arrays.copyOf(container, defaultSize += 5);
+            defaultSize += 5;
+            container = Arrays.copyOf(container, defaultSize);
     }
 
     public void add(T value) {
