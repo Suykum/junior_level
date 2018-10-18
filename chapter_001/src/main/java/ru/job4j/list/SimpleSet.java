@@ -13,8 +13,9 @@ public class SimpleSet<T> implements Iterable<T> {
         Iterator<T> iterator = set.iterator();
         boolean result = false;
         while (iterator.hasNext()) {
-            if (iterator.next() == e) {
+            if (iterator.next().equals(e)) {
                 result = true;
+                break;
             }
         }
         return result;
@@ -27,17 +28,6 @@ public class SimpleSet<T> implements Iterable<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return new Iterator<T>() {
-            Iterator<T> iteratorForSet = set.iterator();
-            @Override
-            public boolean hasNext() {
-                return iteratorForSet.hasNext();
-            }
-
-            @Override
-            public T next() {
-                return iteratorForSet.next();
-            }
-        };
+        return set.iterator();
     }
 }
