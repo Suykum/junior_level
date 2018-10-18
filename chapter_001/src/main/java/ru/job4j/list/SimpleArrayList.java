@@ -64,4 +64,35 @@ public class SimpleArrayList<E> {
             this.date = date;
         }
     }
+
+    public boolean hasCycle() {
+
+        Node<E> fast = first;
+        Node<E> slow = first;
+        while(fast!= null && fast.next != null){
+            fast = fast.next.next;
+            slow = slow.next;
+
+            if(fast == slow ){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void setNext(E key) {
+        Node<E> node = getNode(key);
+        node.next = first;
+    }
+
+    public Node getNode(E key) {
+        Node<E> current = first;
+        while (current != null) {
+            if (current.date == key) {
+                break;
+            }
+            current = current.next;
+        }
+        return current;
+    }
 }
