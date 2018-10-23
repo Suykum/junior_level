@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class UserMapTest {
 
-    //@Test
+    @Test
     public void whenTheSameUser() {
         User user1 = new User("Anna", 28, 1);
         User user2 = new User("Anna", 28, 1);
@@ -27,7 +27,7 @@ public class UserMapTest {
                     + ", number of children: " + s.getKey().getChildren());
         }
     }
-    public static void main(String[] args) {
+   /* public static void main(String[] args) {
 
         User user1 = new User("Anna", 28,  1);
         User user2 = new User("Anna", 28,  1);
@@ -56,6 +56,6 @@ public class UserMapTest {
     static int index(int hash) {
         return (16 - 1) & hash;
     }
-
+*/
 
 }
