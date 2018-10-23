@@ -36,4 +36,15 @@ public class User {
     public void setChildren(int children) {
         this.children = children;
     }
+
+    /*@Override
+    public boolean equals(Object object) {
+        User user = (User) object;
+        return this.name.equals(user.name) && this.birthday.equals(user.birthday)&& this.children == user.children;
+    }*/
+
+    @Override
+    public int hashCode() {
+        return this.name.hashCode() +  this.birthday.hashCode() + children;
+    }
 }

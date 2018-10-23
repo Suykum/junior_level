@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class UserMapTest {
 
-    @Test
+    //@Test
     public void whenTheSameUser() {
         User user1 = new User("Anna", 1980, 02, 03, 1);
         User user2 = new User("Anna", 1980, 02, 03, 1);
@@ -27,5 +27,35 @@ public class UserMapTest {
                     ", number of children: " + s.getKey().getChildren());
         }
     }
+    public static void main(String[] args) {
+
+        User user1 = new User("Anna", 1980, 02, 03, 1);
+        User user2 = new User("Anna", 1980, 02, 03, 1);
+        int i = user1.hashCode();
+        int i2 = user2.hashCode();
+        System.out.println("First user's hashCode: " + i);
+        System.out.println("Second user's hashCode: " + i2);
+        //далее на основе данного значения вычисляется хэш
+        System.out.println("=======================================");
+        int hash = hash(user1);
+        int hash2 = hash(user2);
+        System.out.println("First user's hash: " + hash);
+        System.out.println("Second user's hash: " + hash2);
+        System.out.println("=======================================");
+        //далее на основе хэша вычисляется ячейка в массиве будем считать дефолтный размер мапы = 16
+        int index = index(hash);
+        int index2 = index(hash2);
+        System.out.println(index);
+        System.out.println(index2);
+
+    }
+    static final int hash(Object key) {
+        int h;
+        return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
+    }
+    static int index(int hash) {
+        return (16 - 1) & hash;
+    }
+
 
 }
