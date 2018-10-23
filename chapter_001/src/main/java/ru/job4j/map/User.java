@@ -4,12 +4,13 @@ import java.util.Calendar;
 
 public class User {
     private String name;
-    private Calendar birthday = Calendar.getInstance();
+    //private Calendar birthday = Calendar.getInstance();
     private int children;
+    private int age;
 
-    public User(String name,  int birthYear, int birthMonth, int birthDate, int children) {
+    public User(String name,  int age, int children) {
         this.setName(name);
-        this.birthday.set(birthYear, birthMonth, birthDate);
+        this.setAge(age);
         this.setChildren(children);
     }
 
@@ -21,12 +22,12 @@ public class User {
         this.name = name;
     }
 
-    public Calendar getBirthday() {
-        return birthday;
+    public int getAge() {
+        return age;
     }
 
-    public void setBirthday(Calendar birthday) {
-        this.birthday = birthday;
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public int getChildren() {
@@ -37,14 +38,16 @@ public class User {
         this.children = children;
     }
 
-    /*@Override
+    @Override
     public boolean equals(Object object) {
         User user = (User) object;
-        return this.name.equals(user.name) && this.birthday.equals(user.birthday)&& this.children == user.children;
-    }*/
-
-    @Override
-    public int hashCode() {
-        return this.name.hashCode() +  this.birthday.hashCode() + children;
+        return this.name.equals(user.name) && this.age == user.age && this.children == user.children;
     }
+
+   /* public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + age;
+        result = 31 * result + children;
+        return result;
+    }*/
 }

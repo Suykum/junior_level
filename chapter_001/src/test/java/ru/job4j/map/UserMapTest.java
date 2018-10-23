@@ -10,9 +10,9 @@ public class UserMapTest {
 
     //@Test
     public void whenTheSameUser() {
-        User user1 = new User("Anna", 1980, 02, 03, 1);
-        User user2 = new User("Anna", 1980, 02, 03, 1);
-        Map<User,Object> userMap = new HashMap<>();
+        User user1 = new User("Anna", 28, 1);
+        User user2 = new User("Anna", 28, 1);
+        Map<User, Object> userMap = new HashMap<>();
         userMap.put(user1, 1);
         userMap.put(user2, 2);
         Set<Map.Entry<User, Object>> set = userMap.entrySet();
@@ -23,23 +23,23 @@ public class UserMapTest {
         System.out.println();
         System.out.println("equals result: " + user1.equals(user2));
         for (Map.Entry<User, Object> s : set) {
-            System.out.println("Name: " + s.getKey().getName() + ", birthday: " + s.getKey().getBirthday().getTime().toString() +
-                    ", number of children: " + s.getKey().getChildren());
+            System.out.println("Name: " + s.getKey().getName() + ", birthday: " + s.getKey().getAge()
+                    + ", number of children: " + s.getKey().getChildren());
         }
     }
     public static void main(String[] args) {
 
-        User user1 = new User("Anna", 1980, 02, 03, 1);
-        User user2 = new User("Anna", 1980, 02, 03, 1);
+        User user1 = new User("Anna", 28,  1);
+        User user2 = new User("Anna", 28,  1);
         int i = user1.hashCode();
         int i2 = user2.hashCode();
-        System.out.println("First user's hashCode: " + i);
+        System.out.println("First user's hashCode:  " + i);
         System.out.println("Second user's hashCode: " + i2);
         //далее на основе данного значения вычисляется хэш
         System.out.println("=======================================");
         int hash = hash(user1);
         int hash2 = hash(user2);
-        System.out.println("First user's hash: " + hash);
+        System.out.println("First user's hash:  " + hash);
         System.out.println("Second user's hash: " + hash2);
         System.out.println("=======================================");
         //далее на основе хэша вычисляется ячейка в массиве будем считать дефолтный размер мапы = 16
