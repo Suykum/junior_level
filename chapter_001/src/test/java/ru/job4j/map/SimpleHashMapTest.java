@@ -35,10 +35,10 @@ public class SimpleHashMapTest {
         myHashMap.insert("300", "0");
         myHashMap.insert("301", "1");
         myHashMap.insert("305", "5");
-        Iterator<SimpleEntry> iter = myHashMap.iterator();
+        Iterator<SimpleEntry<String, String>> iter = myHashMap.iterator();
         iter.next().getKey();
         iter.next().getKey();
-        assertThat(iter.next().getKey(), is("305"));
+        assertThat(iter.hasNext(), is(true));
     }
     @Test
     public void whenResizeTable() {
@@ -54,16 +54,18 @@ public class SimpleHashMapTest {
         myHashMap.insert("901", "one");
         myHashMap.insert("902", "two");
         myHashMap.insert("903", "three");
+        System.out.println("Number of elements: " + myHashMap.getNumElem());
         System.out.println("Size before: " + myHashMap.tableSize());
         System.out.println("Before resizing index of key 501: " + myHashMap.getIndex("500"));
-        //myHashMap.tableResize();
         myHashMap.insert("801", "one");
         myHashMap.insert("802", "two");
         myHashMap.insert("803", "three");
         myHashMap.insert("804", "three");
         myHashMap.insert("805", "three");
         myHashMap.insert("806", "three");
-
+        myHashMap.insert("1", "three");
+        myHashMap.insert("2", "three");
+        System.out.println("Number of elements: " + myHashMap.getNumElem());
         System.out.println("Size after: " + myHashMap.tableSize());
         System.out.println("After resizing index of key 501: " + myHashMap.getIndex("500"));
 
