@@ -10,7 +10,7 @@ public class RectangleMove implements Runnable {
     @Override
     public void run() {
         boolean flag = true;
-        while (true) {
+        while (!Thread.currentThread().isInterrupted()) {
             if (rect.getX() == 300) {
                 flag = false;
             } else if (rect.getX() == 0) {
@@ -26,7 +26,7 @@ public class RectangleMove implements Runnable {
             try {
                 Thread.sleep(50);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                Thread.currentThread().interrupt();
             }
         }
     }
