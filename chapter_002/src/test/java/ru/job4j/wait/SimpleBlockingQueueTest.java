@@ -2,7 +2,14 @@ package ru.job4j.wait;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.*;
+
 public class SimpleBlockingQueueTest {
+    List<Integer> buffer = new ArrayList<>();
     private class QueueManipulatingThreads implements Runnable {
         Thread thrd;
         SimpleBlockingQueue<Integer> queue;
@@ -20,8 +27,9 @@ public class SimpleBlockingQueueTest {
                 }
 
             } else {
-                for (int i = 1; i <= 4; i++) {
-                    System.out.println(queue.poll());
+                for (int i = 1; i <= 5; i++) {
+                    buffer.add(queue.poll());
+                    //System.out.println(queue.poll());
                 }
             }
         }
@@ -40,8 +48,8 @@ public class SimpleBlockingQueueTest {
             e.printStackTrace();
         }
 
-        System.out.println("Number of remain elements " + queue.getSize());
-
+        assertThat(buffer, is(Arrays.asList(1, 2, 3, 4, 5)));
+        //System.out.println("Number of remain elements " + queue.getSize());
 
     }
 }
