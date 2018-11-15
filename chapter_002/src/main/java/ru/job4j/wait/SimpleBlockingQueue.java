@@ -10,6 +10,7 @@ public class SimpleBlockingQueue<T> {
     int queueCapacity;
     @GuardedBy("this")
     private Queue<T> queue;
+    private boolean full = false;
     public SimpleBlockingQueue() {
         queue = new LinkedList<>();
         queueCapacity = 5;
@@ -17,11 +18,11 @@ public class SimpleBlockingQueue<T> {
 
     public synchronized void offer(T value) {
         if (queue.size() == queueCapacity) {
+            full = true;
             notify();
-            return;
         }
 
-        while (!queue.isEmpty()  && Thread.currentThread().isInterrupted()) {
+        while (full  && Thread.currentThread().isInterrupted()) {
             try {
                 wait();
             } catch (InterruptedException e) {
@@ -33,11 +34,11 @@ public class SimpleBlockingQueue<T> {
 
     public synchronized T poll() {
         if (queue.isEmpty()) {
+            full = false;
             notify();
-            return null;
         }
 
-        while (queue.isEmpty() && Thread.currentThread().isInterrupted()) {
+        while (!full  && !Thread.currentThread().isInterrupted()) {
             try {
                 wait();
             } catch (InterruptedException e) {
