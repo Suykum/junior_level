@@ -22,7 +22,7 @@ public class SimpleBlockingQueue<T> {
             notify();
         }
 
-        while (full  && Thread.currentThread().isInterrupted()) {
+        while (full && Thread.currentThread().isInterrupted()) {
             try {
                 wait();
             } catch (InterruptedException e) {
@@ -32,19 +32,16 @@ public class SimpleBlockingQueue<T> {
         queue.offer(value);
     }
 
-    public synchronized T poll() {
+    public synchronized T poll() throws InterruptedException {
         if (queue.isEmpty()) {
             full = false;
             notify();
         }
 
-        while (!full  && !Thread.currentThread().isInterrupted()) {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+        while (queue.isEmpty()) {
+            wait();
         }
+        notify();
         return queue.poll();
     }
 

@@ -8,19 +8,20 @@ public class ParallelSearch {
 
         final Thread consumer = new Thread(
                 () -> {
-                    while (Thread.currentThread().isInterrupted()) {
+
+                    while (!Thread.currentThread().isInterrupted()) {
                         try {
-                            System.out.println(queue.poll());
                             Thread.sleep(500);
+                            System.out.println(queue.poll());
                         } catch (InterruptedException e) {
-                            e.printStackTrace();
                             Thread.currentThread().interrupt();
                         }
+
                     }
                 }
         );
         consumer.start();
-        new Thread(
+        final Thread producer = new Thread(
                 () -> {
                     for (int index = 0; index != 3; index++) {
                         queue.offer(index);
@@ -32,9 +33,15 @@ public class ParallelSearch {
                     }
                 }
 
-        ).start();
+        );
 
-
+        producer.start();
+        try {
+            producer.join();
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+        consumer.interrupt();
     }
 
 }
