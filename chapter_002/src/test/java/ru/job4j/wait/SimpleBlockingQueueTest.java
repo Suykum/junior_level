@@ -28,7 +28,12 @@ public class SimpleBlockingQueueTest {
 
             } else {
                 for (int i = 1; i <= 5; i++) {
-                    buffer.add(queue.poll());
+                    try {
+                        buffer.add(queue.poll());
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
                     //System.out.println(queue.poll());
                 }
             }
