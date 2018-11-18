@@ -5,19 +5,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ThreadPool {
-    private int size = Runtime.getRuntime().availableProcessors();
-    private final List<ThreadForPool> threads;
+    private final List<Thread> threads;
     private final SimpleBlockingQueue<Runnable> tasks;
 
-
     public ThreadPool() {
+        int size = Runtime.getRuntime().availableProcessors();
         threads = new ArrayList<>(size);
         tasks = new SimpleBlockingQueue<>();
+        StartWork(size);
+    }
+
+    private void StartWork(int size) {
         for (int i = 0; i < size; i++) {
-            threads.add(new ThreadForPool(tasks));
-        }
-        for (ThreadForPool thread : threads) {
-            thread.thrd.start();
+            Thread e = new Thread(new ThreadForPool(tasks));
+            threads.add(e);
+            e.start();
         }
     }
 
@@ -26,8 +28,8 @@ public class ThreadPool {
     }
 
     public void shutdown() {
-        for (ThreadForPool thread : threads) {
-            thread.thrd.interrupt();
+        for (Thread thread : threads) {
+            thread.interrupt();
         }
     }
 }

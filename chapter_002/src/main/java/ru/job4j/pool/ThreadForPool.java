@@ -3,19 +3,19 @@ package ru.job4j.pool;
 import ru.job4j.wait.SimpleBlockingQueue;
 
 public class ThreadForPool implements Runnable {
-    Thread thrd;
-    SimpleBlockingQueue<Runnable> tasks;
+    private final SimpleBlockingQueue<Runnable> tasks;
 
-    public ThreadForPool(SimpleBlockingQueue<Runnable> tasks) {
-        thrd = new Thread(this);
+    public ThreadForPool(final SimpleBlockingQueue<Runnable> tasks) {
         this.tasks = tasks;
     }
     @Override
     public void run() {
-        while (tasks.poll() != null) {
+        while (!Thread.currentThread().isInterrupted()) {
             try {
                 Runnable runnable = tasks.poll();
-                runnable.run();
+                if (runnable != null) {
+                    runnable.run();
+                }
             } catch (Exception e) {
 
             }
