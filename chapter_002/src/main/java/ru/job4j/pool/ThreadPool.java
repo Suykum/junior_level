@@ -37,12 +37,12 @@ public class ThreadPool {
         }
     }
 
-    public void run(){
-        while(!isStopped){
-            try{
+    public void run() {
+        while (!isStopped) {
+            try {
                 Runnable runnable = tasks.poll();
                 runnable.run();
-            } catch(Exception e){
+            } catch (Exception e) {
 
             }
         }
