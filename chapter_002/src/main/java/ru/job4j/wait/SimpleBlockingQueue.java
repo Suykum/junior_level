@@ -32,14 +32,18 @@ public class SimpleBlockingQueue<T> {
         queue.offer(value);
     }
 
-    public synchronized T poll() throws InterruptedException {
+    public synchronized T poll() {
         if (queue.isEmpty()) {
             full = false;
             notify();
         }
 
         while (queue.isEmpty()) {
-            wait();
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
         notify();
         return queue.poll();

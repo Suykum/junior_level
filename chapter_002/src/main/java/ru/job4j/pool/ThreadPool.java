@@ -6,23 +6,18 @@ import java.util.List;
 
 public class ThreadPool {
     private int size = Runtime.getRuntime().availableProcessors();
-    private final List<Thread> threads;
+    private final List<ThreadForPool> threads;
     private final SimpleBlockingQueue<Runnable> tasks;
-    private boolean isStopped;
+
 
     public ThreadPool() {
         threads = new ArrayList<>(size);
         tasks = new SimpleBlockingQueue<>();
-        isStopped = false;
         for (int i = 0; i < size; i++) {
-            try {
-                threads.add(new Thread(tasks.poll()));
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            threads.add(new ThreadForPool(tasks));
         }
-        for (Thread thread : threads) {
-            thread.start();
+        for (ThreadForPool thread : threads) {
+            thread.thrd.start();
         }
     }
 
@@ -31,20 +26,8 @@ public class ThreadPool {
     }
 
     public void shutdown() {
-        isStopped = true;
-        for (Thread thread : threads) {
-            thread.interrupt();
-        }
-    }
-
-    public void run() {
-        while (!isStopped) {
-            try {
-                Runnable runnable = tasks.poll();
-                runnable.run();
-            } catch (Exception e) {
-
-            }
+        for (ThreadForPool thread : threads) {
+            thread.thrd.interrupt();
         }
     }
 }
