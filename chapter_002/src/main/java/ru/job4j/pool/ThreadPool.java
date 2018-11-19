@@ -14,10 +14,10 @@ public class ThreadPool {
         int size = Runtime.getRuntime().availableProcessors();
         threads = new ArrayList<>(size);
         tasks = new SimpleBlockingQueue<>();
-        StartWork(size);
+        startWork(size);
     }
 
-    private void StartWork(int size) {
+    private void startWork(int size) {
         LOGGER.info(size + " threads will be created in the pool");
         for (int i = 0; i < size; i++) {
             Thread e = new Thread(new ThreadForPool(tasks));
