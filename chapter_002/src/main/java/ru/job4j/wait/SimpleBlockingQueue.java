@@ -19,7 +19,6 @@ public class SimpleBlockingQueue<T> {
     public synchronized void offer(T value) {
         if (queue.size() == queueCapacity) {
             full = true;
-            notify();
         }
 
         while (full && Thread.currentThread().isInterrupted()) {
@@ -29,6 +28,7 @@ public class SimpleBlockingQueue<T> {
                 e.printStackTrace();
             }
         }
+        notify();
         queue.offer(value);
     }
 
