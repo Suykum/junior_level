@@ -11,9 +11,9 @@ public class EmailNotificationTest {
         users.add(new User("Sasha", "sasha@gmail.com"));
         users.add(new User("Masha", "masha@gmail.com"));
         users.add(new User("Misha", "misha@gmail.com"));
+
         for (User u : users) {
             notification.emailTo(u);
-
         }
 
         notification.close();
