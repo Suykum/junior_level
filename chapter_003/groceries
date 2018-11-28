@@ -1,0 +1,45 @@
+create database groceries;
+create table product_type(
+	type_id serial primary key,
+	type_name varchar(50)
+);
+create table product(
+	product_id serial primary key,
+	product_name varchar(50),
+	type_id int references product_type(type_id),
+	expired_date date,
+	price money
+);
+insert into product_type(type_name) values ('milk'), ('cheese'), ('sausage'),('butter'),('ice-cream');
+insert into product(product_name, type_id, expired_date, price) 
+	values ('Milky', 1, '2018-12-11', 1), ('Mondy', 1, '2018-12-20', 1.1), ('Rainbow', 1, '2018-11-30', 0.9),
+	('President cheese', 2, '2019-02-20', 10), ('Parmesan cheese', 2, '2018-12-30', 13.3), ('Swiss', 2, '2019-10-1', 19.9),
+	('Gluten free sausage', 3, '2019-05-05', 18), ('Grill sausage', 3, '2019-06-10', 21.5), ('Breakfast sausage', 3, '2018-12-30', 22),
+	('WoWButter', 4, '2018-12-25', 5.6), ('Tofu Butter', 4, '2019-02-23', 7.1), ('Pasture Butter', 4, '2019-04-15', 4.4),
+	('Plombir', 5, '2018-11-30', 1.4), ('Oreo icecream', 5, '2018-12-26', 1.6), ('Magnum', 5, '2019-01-20', 2);
+
+--1. Написать запрос получение всех продуктов с типом "СЫР"
+select product_name from product where type_id=2;
+
+--2. Написать запрос получения всех продуктов, у кого в имени есть слово "мороженное"
+select product_name from product where product_name like '%icecream';
+
+--3. Написать запрос, который выводит все продукты, срок годности которых заканчивается в следующем месяце.
+select product_name, expired_date from product where expired_date between '2018-12-01' and '2018-12-31';
+
+--4. Написать запрос, который выводит самый дорогой продукт.
+select product_name, price from product order by price desc limit 2;
+
+--5. Написать запрос, который выводит количество всех продуктов определенного типа.
+select type_name, count(type_id) from product natural join product_type group by type_name;
+
+--6. Написать запрос получение всех продуктов с типом "СЫР" и "МОЛОКО"
+select product_name, type_name from product natural join product_type where type_name='milk' or type_name='cheese'; 
+
+--7. Написать запрос, который выводит тип продуктов, которых осталось меньше 10 штук.  
+select type_name, count(type_id) from product natural join product_type group by type_name having count(type_id)<10;
+
+--8. Вывести все продукты и их тип.
+select product_name, type_name from product natural join product_type;
+	
+	
