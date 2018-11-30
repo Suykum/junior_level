@@ -29,6 +29,8 @@ select product_name, expired_date from product where extract(month from date(exp
 
 --4. Написать запрос, который выводит самый дорогой продукт.
 select product_name, price from product order by price desc limit 2;
+select product_name, price from product where price=(select max(price) from product);
+																												  
 
 --5. Написать запрос, который выводит количество всех продуктов определенного типа.
 select type_name, count(type_id) from product natural join product_type group by type_name;
