@@ -1,0 +1,44 @@
+create table body (
+	body_id serial primary key,
+	body_type varchar(50)
+);
+create table engine(
+	engine_id serial primary key,
+	engine_type varchar(50)
+);
+create table transmission(
+	transmission_id serial primary key,
+	transmission_type varchar(60)
+);
+create table cars(
+	car_id serial primary key,
+	car_name varchar(20),
+	body_id int references body,
+	engine_id int references engine,
+	transmission_id int references transmission
+);
+insert into body(body_type) values('Hatchback'),('Convertible'),('Wagon'),('Sedan'),('Jeep'),('Van');
+insert into engine(engine_type) values ('Diesel'),('Petrol'),('Gas'),('Elektrik');
+insert into transmission(transmission_type) values ('Manual'), ('Automatic'), ('Continuously variable'), ('Semi-automatic');
+insert into cars(car_name, body_id, engine_id, transmission_id) values ('Skoda', 1, 1, 2),
+	('Audi', 5, 3, 4), ('Mazda', 6, 1, 2), ('Honda', 1, 2, 4);
+
+--1. Вывести список всех машин и все привязанные к ним детали
+select car_name, body_type, engine_type, transmission_type from cars natural join body natural join engine
+	natural join transmission;
+
+--2. Вывести отдельно детали, которые не используются в машине, кузова, двигатели, коробки передач.
+--for body
+select body_type from body where body_type not in (select distinct body_type from body natural join cars);
+--or
+select body_type from cars right outer join body on cars.body_id = body.body_id where cars.body_id is null;
+
+--for engine
+select engine_type from engine where engine_type not in (select distinct engine_type from engine natural join cars);
+--or
+select engine_type from cars right outer join engine on cars.engine_id = engine.engine_id where cars.engine_id is null;
+
+--for transmission
+select transmission_type from transmission where transmission_type not in(select distinct transmission_type from transmission natural join cars);
+
+
