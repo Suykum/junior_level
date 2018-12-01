@@ -41,4 +41,12 @@ select engine_type from cars right outer join engine on cars.engine_id = engine.
 --for transmission
 select transmission_type from transmission where transmission_type not in(select distinct transmission_type from transmission natural join cars);
 
+--All not used elements in one column
+select body_type as not_used from cars cs right outer join body b on cs.body_id=b.body_id where cs.body_id is null
+union all
+select engine_type as not_used from cars cs right outer join engine e on cs.engine_id=e.engine_id where cs.engine_id is null
+union all
+select transmission_type as not_used from cars cs right outer join transmission tn on cs.transmission_id=tn.transmission_id where cs.transmission_id is null; 
+
+
 
