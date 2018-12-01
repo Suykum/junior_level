@@ -40,7 +40,7 @@ public class CacheTest {
 
 
 
-    @Test
+   /* @Test
     public void whenTwoThreads() throws InterruptedException {
         thread1.start();
         thread2.start();
@@ -51,5 +51,5 @@ public class CacheTest {
         Assert.assertThat(ex.get().getMessage(), is("Optimistic Exception found"));
 
 
-    }
+    }*/
 }
