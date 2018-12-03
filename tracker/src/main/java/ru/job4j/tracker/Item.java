@@ -16,6 +16,11 @@ public class Item {
         this.desc = desc;
         this.create = create;
     }
+    public Item(String id, String name, String desc) {
+        this.id = id;
+        this.name = name;
+        this.desc = desc;
+    }
 
 
     public String getId() {
