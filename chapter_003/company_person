@@ -1,0 +1,13 @@
+create table company(company_id serial primary key, company_name varchar(50));
+create table person(person_id serial primary key, person_name varchar(50), company_id int references company);
+insert into company(company_name) values ('Bosh'), ('Beko'), ('Siemens'), ('Sinbo'), ('Vestel'), ('Philips');
+insert into person(person_name, company_id) values ('Alex', 1), ('Tom', 1), ('Bil', 2), ('John', 2), ('Anna', 2),
+													('Jack', 3), ('Nicol', 4), ('Maria', 4), ('Jess', 4), ('Merry', 5), ('Sam', 4);
+									
+select person_name, company_name from person natural join company where person.company_id != 5; 
+select company_name, count(company_id) as persons_num from person natural join company group by company_name order by persons_num desc limit 1;
+
+
+
+																										   
+																										   
