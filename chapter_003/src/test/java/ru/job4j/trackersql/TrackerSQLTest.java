@@ -9,7 +9,7 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
 public class TrackerSQLTest {
-    TrackerSQL sql = new TrackerSQL();
+    /*TrackerSQL sql = new TrackerSQL();
     Item item1 = new Item("web", "web page errors");
     Item item2 = new Item("mobile", "mobile app errors");
     Item item3 = new Item("desktop", "desktop software errors");
@@ -61,9 +61,9 @@ public class TrackerSQLTest {
 
     @Test
     public void whenSearchById() {
-       Item item = sql.findById("4");
+       Item item = sql.findById("2");
         System.out.println(item.getId() + " : " + item.getName() + " : " + item.getDesc());
     }
-
+*/
 
 }

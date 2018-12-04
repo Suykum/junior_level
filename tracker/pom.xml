@@ -10,6 +10,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>tracker</artifactId>
-
+    <dependencies>
+        <dependency>
+            <groupId>ru.job4j</groupId>
+            <artifactId>chapter_003</artifactId>
+            <version>2.0</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 
 </project>

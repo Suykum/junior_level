@@ -1,4 +1,6 @@
 package ru.job4j.tracker;
+import ru.job4j.trackersql.TrackerSQL;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -6,9 +8,9 @@ import java.util.function.Consumer;
 public class MenuTracker {
 
     private Input input;
-    private ITracker tracker;
+    private TrackerSQL tracker;
     private ArrayList<UserAction> actions = new ArrayList<>();
-    public MenuTracker(Input input, ITracker tracker) {
+    public MenuTracker(Input input, TrackerSQL tracker) {
         this.input = input;
         this.tracker = tracker;
     }
@@ -64,7 +66,7 @@ public class MenuTracker {
         }
 
         @Override
-        public void execute(Input input, ITracker tracker) {
+        public void execute(Input input, TrackerSQL tracker) {
             System.out.println("------------ Adding new Item --------------");
             String name = input.ask("Enter a name of Item : ");
             String desc = input.ask("Enter description of Item: ");
@@ -79,7 +81,7 @@ public class MenuTracker {
             super(key, name);
         }
         @Override
-        public void execute(Input input, ITracker tracker) {
+        public void execute(Input input, TrackerSQL tracker) {
             ArrayList<Item> allItems = tracker.getAll();
             if (allItems.size() != 0) {
                 System.out.println("------------ All Items --------------");
@@ -96,7 +98,7 @@ public class MenuTracker {
             super(key, name);
         }
         @Override
-        public void execute(Input input, ITracker tracker) {
+        public void execute(Input input, TrackerSQL tracker) {
             System.out.println("------------ Edit Item--------------");
             String id = input.ask("Enter ID of the item: ");
             Item resultOfSearch = tracker.findById(id);
@@ -116,7 +118,7 @@ public class MenuTracker {
             super(key, name);
         }
         @Override
-        public void execute(Input input, ITracker tracker) {
+        public void execute(Input input, TrackerSQL tracker) {
             System.out.println("------------ Deleting item --------------");
             String id = input.ask("Enter ID of item: ");
             if (tracker.delete(id)) {
@@ -131,7 +133,7 @@ public class MenuTracker {
             super(key, name);
         }
         @Override
-        public void execute(Input input, ITracker tracker) {
+        public void execute(Input input, TrackerSQL tracker) {
             System.out.println("------------ Searching by ID --------------");
             String id = input.ask("Enter ID of the item: ");
             Item resultOfSearch = tracker.findById(id);
@@ -148,7 +150,7 @@ public class MenuTracker {
             super(key, name);
         }
         @Override
-        public void execute(Input input, ITracker tracker) {
+        public void execute(Input input, TrackerSQL tracker) {
             System.out.println("------------ Searching by name --------------");
             String key = input.ask("Enter the name of item: ");
             ArrayList<Item> resultOfSearch = tracker.findByName(key);
@@ -169,8 +171,13 @@ public class MenuTracker {
             this.input = input;
         }
         @Override
-        public void execute(Input input, ITracker tracker) {
+        public void execute(Input input, TrackerSQL tracker) {
             this.input.stop();
+            try {
+                tracker.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 

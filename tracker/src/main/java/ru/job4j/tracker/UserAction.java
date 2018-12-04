@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import ru.job4j.trackersql.TrackerSQL;
+
 public interface UserAction {
 
     /**
@@ -12,7 +14,7 @@ public interface UserAction {
      * @param input объект типа Input
      * @param tracker объект типа Tracker
      */
-    void execute(Input input, ITracker tracker);
+    void execute(Input input, TrackerSQL tracker);
     /**
      * Метод возвращает информацию о данном пункте меню.
      * @return Строка меню

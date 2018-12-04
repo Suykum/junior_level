@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import ru.job4j.trackersql.TrackerSQL;
+
 import java.util.ArrayList;
 
 /**
@@ -13,7 +15,7 @@ public class StartUI {
     /**
      * Хранилище заявок.
      */
-    private final ITracker tracker;
+    private final TrackerSQL tracker;
     private boolean working = true;
 
     /**
@@ -22,7 +24,7 @@ public class StartUI {
      * @param input   ввод данных.
      * @param tracker хранилище заявок.
      */
-    public StartUI(Input input, ITracker tracker) {
+    public StartUI(Input input, TrackerSQL tracker) {
         this.input = input;
         this.tracker = tracker;
     }
@@ -54,7 +56,7 @@ public class StartUI {
          */
     public static void main(String[] args) throws MenuOutException {
 
-        new StartUI(new ValidateInput(new ConsoleInput()), new Tracker()).init();
+        new StartUI(new ValidateInput(new ConsoleInput()), new TrackerSQL()).init();
 
     }
 }
