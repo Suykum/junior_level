@@ -14,14 +14,20 @@ public class MagnitTest {
     Config config = new Config();
     ArrayList<Entry> list;
     StoreSQL storeSQL = new StoreSQL(config);
+
     @Test
-    public void whenStoreSQLTested() {
-        storeSQL.createNewDatabase("magnit");
-        storeSQL.generate(4);
-        list = storeSQL.selectAll();
-        assertThat(list.size(), is(4));
+    public void whenSpeedOfExecutingTested() {
+        storeSQL.dataInsertingTime(1000000);
     }
 
+    @Test
+    public void whenStoreSQLTested() {
+        storeSQL.createNewDatabase();
+        storeSQL.generate(4);
+        list = storeSQL.selectAll();
+        storeSQL.close();
+        assertThat(list.size(), is(4));
+    }
 
     //3. Генерация XML из данных базы. Описывается класс StoreXML
     @Test
@@ -29,7 +35,6 @@ public class MagnitTest {
         StoreXML storeXML = new StoreXML(new File("C:/projects/entries"));
         list = storeSQL.selectAll();
         storeXML.save(list);
-
     }
 
     //4. Преобразовать полученный файл из пункта 3 в файл другого XML формата через XSTL.
@@ -47,6 +52,4 @@ public class MagnitTest {
        int sum = parserSum.getSum();
        assertThat(sum, is(10));
     }
-
-
 }
