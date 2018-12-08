@@ -17,7 +17,8 @@ public class MagnitTest {
 
     @Test
     public void whenSpeedOfExecutingTested() {
-        storeSQL.dataInsertingTime(1000000);
+        //storeSQL.dataInsertingTime(1000000);
+       // storeSQL.close();
     }
 
     @Test

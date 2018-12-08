@@ -1,7 +1,6 @@
 package ru.job4j.sqlite;
 
 import org.apache.log4j.Logger;
-
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -48,9 +47,9 @@ public class StoreSQL implements AutoCloseable {
     private void createNewTable() {
         // SQL statement for creating a new table
         String sql = "CREATE TABLE IF NOT EXISTS entry (field integer);";
-        try (Statement stmt = connection.createStatement()) {
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             // create a new table
-            stmt.execute(sql);
+            pstmt.execute();
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
         }
@@ -82,8 +81,8 @@ public class StoreSQL implements AutoCloseable {
     public ArrayList<Entry> selectAll() {
         ArrayList<Entry> allEntry = new ArrayList<>();
         String sql = "SELECT * FROM entry";
-        try (Statement stmt  = connection.createStatement();
-             ResultSet rs    = stmt.executeQuery(sql)) {
+        try (PreparedStatement pstmt  = connection.prepareStatement(sql);
+             ResultSet rs    = pstmt.executeQuery()) {
             // loop through the result set
             while (rs.next()) {
                 allEntry.add(new Entry(rs.getInt("field")));
@@ -98,7 +97,7 @@ public class StoreSQL implements AutoCloseable {
         long startTime = System.currentTimeMillis();
         generate(numberOfInsertingElements);
         long endTime = System.currentTimeMillis();
-        long finalTime = endTime-startTime;
+        long finalTime = endTime - startTime;
         System.out.println(finalTime + " Milliseconds used for inserting " + numberOfInsertingElements + " elements");
     }
 
