@@ -3,11 +3,11 @@ package ru.job4j.vacancy;
 import org.apache.log4j.Logger;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class DataBase implements AutoCloseable {
     private static final Logger LOGGER = Logger.getLogger(DataBase.class);
     private Connection connect;
-    private Date lastDateinDB = null;
 
     public DataBase() {
         connect = ConnectorDB.getConnect();
@@ -30,15 +30,20 @@ public class DataBase implements AutoCloseable {
         }
     }
 
-    public boolean insertVacancy(Vacancy vacancy) {
+    public boolean insertVacancy(ArrayList<Vacancy> vacancyList) {
         String sql = "INSERT INTO vacancies(name, body, link, v_date) VALUES (?, ?, ?, ?)";
         boolean inserted = false;
         try (PreparedStatement pstm = connect.prepareStatement(sql)) {
-            pstm.setString(1, vacancy.getName());
-            pstm.setString(2, vacancy.getBody());
-            pstm.setString(3, vacancy.getLink());
-            pstm.setDate(4,  vacancy.getDate());
-            pstm.executeUpdate();
+            connect.setAutoCommit(false);
+            for (Vacancy v : vacancyList) {
+                pstm.setString(1, v.getName());
+                pstm.setString(2, v.getBody());
+                pstm.setString(3, v.getLink());
+                pstm.setDate(4,  v.getDate());
+                pstm.addBatch();
+            }
+            pstm.executeBatch();
+            connect.commit();
             inserted = true;
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
@@ -48,7 +53,7 @@ public class DataBase implements AutoCloseable {
 
     public Date lastDateInDB() {
         String sql = "SELECT MAX(v_date) as date from vacancies";
-        ResultSet resultSet = null;
+        ResultSet resultSet;
         Date lastdate = null;
         try (PreparedStatement pstmt = connect.prepareStatement(sql)) {
             resultSet = pstmt.executeQuery();
