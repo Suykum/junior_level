@@ -1,0 +1,8 @@
+--ADDITIONAL TASK FROM EXAM
+--TASK: given a table ITEM with two fields ID and NAME. Field name contain duplicates. You should delete duplicated names.
+--SOLUTION:
+create database items;
+create table item(id serial primary key, iname varchar(15));
+insert into item(iname) values ('Masha'), ('Anna'), ('Anna'), ('Nina'), ('John'), ('John'), ('John'), ('Sara'), ('Sara');
+delete from item a using item b where a.id < b.id and a.iname = b.iname;
+select * from item;
