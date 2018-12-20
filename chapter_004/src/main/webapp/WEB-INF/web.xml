@@ -1,6 +1,4 @@
 
-
-
 <web-app xmlns="http://java.sun.com/xml/ns/j2ee"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
@@ -14,5 +12,22 @@
         <servlet-name>EchoServlet</servlet-name>
         <url-pattern>/echo</url-pattern>
     </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>UserServlet</servlet-name>
+        <servlet-class>ru.job4j.http.UserServlet</servlet-class>
+        <init-param>
+            <param-name>debug</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UserServlet</servlet-name>
+        <url-pattern>/UserServlet.do</url-pattern>
+    </servlet-mapping>
+
 </web-app>
 
