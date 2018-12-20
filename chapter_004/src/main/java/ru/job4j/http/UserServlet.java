@@ -1,11 +1,14 @@
 package ru.job4j.http;
 
+import org.apache.log4j.Logger;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.UUID;
 
 public class UserServlet extends HttpServlet {
 
@@ -34,17 +37,19 @@ public class UserServlet extends HttpServlet {
 
         switch (action) {
             case "add":
-                out.println(validateUserStore.add(new User(id, name, login, email)));
+                out.println(validateUserStore.add(new User(name, login, email)));
                 break;
             case "update":
-                out.println(validateUserStore.update(id, new User(id, name, login, email)));
+                out.println(validateUserStore.update(UUID.fromString(id), new User(name, login, email)));
                 break;
             case "delete":
-                out.println(validateUserStore.delete(id));
+                out.println(validateUserStore.delete(UUID.fromString(id)));
                 break;
             case "find":
-               out.println(validateUserStore.findById(id));
+               out.println(validateUserStore.findById(UUID.fromString(id)));
                 break;
+            default:
+                out.println("Chose appropriate action");
         }
     }
 }

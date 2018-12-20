@@ -1,28 +1,28 @@
 package ru.job4j.http;
 
 import java.sql.Date;
+import java.util.UUID;
 
 
 public class User {
-    private String id;
+    private UUID id;
     private String name;
     private String login;
     private String email;
     private Date createDate;
 
-    public User(String id, String name, String login, String email) {
-        this.setId(id);
+    public User(String name, String login, String email) {
         this.setName(name);
         this.setLogin(login);
         this.setEmail(email);
         createDate = new Date(System.currentTimeMillis());
     }
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
