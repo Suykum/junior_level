@@ -75,8 +75,8 @@ public class ValidateUser {
     }
 
     private boolean emailValidation(String email) throws UserExeption {
-        String EMAIL_REGEX = "^[\\w-\\+]+(\\.[\\w]+)*@[\\w-]+(\\.[\\w]+)*(\\.[a-z]{2,})$";
-        Pattern pattern = Pattern.compile(EMAIL_REGEX, Pattern.CASE_INSENSITIVE);
+        String emailRegex = "^[\\w-\\+]+(\\.[\\w]+)*@[\\w-]+(\\.[\\w]+)*(\\.[a-z]{2,})$";
+        Pattern pattern = Pattern.compile(emailRegex, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(email);
         boolean r = true;
         if (!matcher.matches()) {
@@ -93,7 +93,7 @@ public class ValidateUser {
                 throw new UserExeption("User with " + login + " login already exist");
             }
         }
-        return r ;
+        return r;
     }
 
     private boolean isEmailExist(String email) throws UserExeption {
@@ -104,6 +104,6 @@ public class ValidateUser {
                 throw new UserExeption("User with " + email + " email already exist");
             }
         }
-        return r ;
+        return r;
     }
 }
