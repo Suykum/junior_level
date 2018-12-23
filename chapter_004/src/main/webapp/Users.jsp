@@ -23,11 +23,11 @@
         <td><%=u.getLogin()%></td>
         <td><%=u.getEmail()%></td>
         <td><%=u.getCreateDate()%></td>
-        <td><form method='get' action='/UserUpdate.jsp'>
+        <td><form method='get' action='<%=request.getContextPath()%>/UserUpdate.jsp'>
         <input type='hidden' name='id' value=<%=u.getId()%>>
         <input type='submit' value='Update'>
         </form></td>
-        <td><form method='get' action='/UserDeleteServlet.do'>
+        <td><form method='get' action="${pageContext.servletContext.contextPath}/UserDeleteServlet.do">
             <input type='hidden' name='id' value=<%=u.getId()%>>
             <input type='submit' value='Delete'>
         </form></td>
@@ -37,7 +37,7 @@
     </table>
     <br>
     <br>
-    <form method='get' action='/UserCreate.jsp'>
+    <form method='get' action='<%=request.getContextPath()%>/UserCreate.jsp'>
         <input type='submit' value='Create New User'>
         </form>
     </body>

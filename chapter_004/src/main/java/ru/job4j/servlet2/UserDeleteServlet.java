@@ -21,6 +21,6 @@ public class UserDeleteServlet extends HttpServlet {
         //writer.flush();
         //writer.close();
         validateUserStore.delete(UUID.fromString(id));
-        resp.sendRedirect("/Users.jsp");
+        resp.sendRedirect(String.format("%s/Users.jsp", req.getContextPath()));
     }
 }

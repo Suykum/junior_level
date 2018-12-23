@@ -47,6 +47,6 @@ public class UserCreateServlet extends HttpServlet {
         //writer.flush();
         //writer.close();
         validateUserStore.add(new User(name, login, email));
-        resp.sendRedirect("/Users.jsp");
+        resp.sendRedirect(String.format("%s/Users.jsp", req.getContextPath()));
     }
 }

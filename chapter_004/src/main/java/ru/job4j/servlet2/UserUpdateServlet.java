@@ -58,6 +58,6 @@ public class UserUpdateServlet extends HttpServlet {
         //writer.flush();
         //writer.close();
         validateUserStore.update(UUID.fromString(id), new User(name, login, email));
-        resp.sendRedirect("/Users.jsp");
+        resp.sendRedirect(String.format("%s/Users.jsp", req.getContextPath()));
     }
 }
