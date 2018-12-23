@@ -35,15 +35,18 @@ public class UserCreateServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
-        PrintWriter writer = new PrintWriter(resp.getOutputStream());
+        //resp.setContentType("text/html");
+        //PrintWriter writer = new PrintWriter(resp.getOutputStream());
         String name = req.getParameter("name");
         String login = req.getParameter("login");
         String email = req.getParameter("email");
-        writer.append(validateUserStore.add(new User(name, login, email)));
-        writer.append("<br>");
-        writer.append("<a href='UsersServlet.do'>Back to UsersServlet</a>");
-        writer.flush();
-        writer.close();
+        //writer.append(validateUserStore.add(new User(name, login, email)));
+        //writer.append("<br>");
+        //writer.append("<a href='UsersServlet.do'>Back to UsersServlet</a>");
+        //writer.append("<a href='Users.jsp'>Back to UsersJSP</a>");
+        //writer.flush();
+        //writer.close();
+        validateUserStore.add(new User(name, login, email));
+        resp.sendRedirect("/Users.jsp");
     }
 }

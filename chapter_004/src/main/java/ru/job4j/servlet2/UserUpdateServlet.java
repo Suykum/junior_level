@@ -45,17 +45,19 @@ public class UserUpdateServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
-        PrintWriter writer = new PrintWriter(resp.getOutputStream());
+        //resp.setContentType("text/html");
+        //PrintWriter writer = new PrintWriter(resp.getOutputStream());
 
         String id = req.getParameter("id");
         String name = req.getParameter("name");
         String login = req.getParameter("login");
         String email = req.getParameter("email");
-        writer.append(validateUserStore.update(UUID.fromString(id), new User(name, login, email)));
-        writer.append("<br>");
-        writer.append("<a href='UsersServlet.do'>Back to UsersServlet</a>");
-        writer.flush();
-        writer.close();
+        //writer.append(validateUserStore.update(UUID.fromString(id), new User(name, login, email)));
+        //writer.append("<br>");
+        //writer.append("<a href='UsersServlet.do'>Back to UsersServlet</a>");
+        //writer.flush();
+        //writer.close();
+        validateUserStore.update(UUID.fromString(id), new User(name, login, email));
+        resp.sendRedirect("/Users.jsp");
     }
 }
