@@ -2,9 +2,13 @@ package ru.job4j.servlet2;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.log4j.Logger;
+
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.UUID;
 
 
@@ -16,13 +20,20 @@ public class DbStore implements Store {
 
 
     public DbStore() {
-        SOURCE.setDriverClassName("org.postgresql.Driver");
-        SOURCE.setUrl("jdbc:postgresql://127.0.0.1:5432/UserServlet");
-        SOURCE.setUsername("postgres");
-        SOURCE.setPassword("password");
-        SOURCE.setMinIdle(5);
-        SOURCE.setMaxIdle(10);
-        SOURCE.setMaxOpenPreparedStatements(100);
+        try (InputStream in = DbStore.class.getClassLoader().getResourceAsStream("app.properties")) {
+            Properties config = new Properties();
+            config.load(in);
+            SOURCE.setDriverClassName(config.getProperty("driver-class-name"));
+            SOURCE.setUrl(config.getProperty("url"));
+            SOURCE.setUsername(config.getProperty("username"));
+            SOURCE.setPassword(config.getProperty("password"));
+            SOURCE.setMinIdle(Integer.parseInt(config.getProperty("minIdle")));
+            SOURCE.setMaxIdle(Integer.parseInt(config.getProperty("maxIdle")));
+            SOURCE.setMaxOpenPreparedStatements(Integer.parseInt(config.getProperty("maxPrepareStatment")));
+        } catch (IOException e) {
+            LOGGER.error(e.getMessage(),e);
+        }
+
     }
 
     public static DbStore getInstance() {
