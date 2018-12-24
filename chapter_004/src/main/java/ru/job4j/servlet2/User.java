@@ -18,6 +18,15 @@ public class User {
         createDate = new Date(System.currentTimeMillis());
     }
 
+    public User(UUID id, String name, String login, String email, Date date) {
+        this.id = id;
+        this.name = name;
+        this.login = login;
+        this.email = email;
+        this.createDate = date;
+
+    }
+
     public UUID getId() {
         return id;
     }
@@ -61,7 +70,7 @@ public class User {
     @Override
     public boolean equals(Object o) {
         User user = (User) o;
-        return this.id == user.id && this.name.equals(user.name) && this.login.equals(user.login) && this.email.equals(user.email);
+        return this.id.equals(user.id) && this.name.equals(user.name) && this.login.equals(user.login) && this.email.equals(user.email);
     }
 
     @Override

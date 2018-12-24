@@ -37,6 +37,7 @@ public class UserCreateServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //resp.setContentType("text/html");
         //PrintWriter writer = new PrintWriter(resp.getOutputStream());
+        validateUserStore.createTable();
         String name = req.getParameter("name");
         String login = req.getParameter("login");
         String email = req.getParameter("email");

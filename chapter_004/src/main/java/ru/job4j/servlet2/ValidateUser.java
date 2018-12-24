@@ -1,6 +1,7 @@
 package ru.job4j.servlet2;
 
 import org.apache.log4j.Logger;
+
 import java.util.List;
 import java.util.UUID;
 import java.util.regex.Matcher;
@@ -15,9 +16,12 @@ public class ValidateUser {
     public static ValidateUser getValidateUserObject() {
         return validateUserObject;
     }
-    private final Store memoryStore = MemoryStore.getMemoryStoreObject();
+    //private final Store memoryStore = MemoryStore.getMemoryStoreObject();
+    private final DbStore memoryStore = DbStore.getInstance();
 
-
+    public void createTable() {
+        memoryStore.createTable();
+    }
     public String add(User user) {
 
         boolean result = false;
