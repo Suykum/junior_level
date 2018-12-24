@@ -6,8 +6,7 @@
         <title>UPDATE USER</title>
     </head>
     <body>
-    <%ValidateUser validateUserStore = ValidateUser.getValidateUserObject();%>
-    <%User user = validateUserStore.findById(UUID.fromString(request.getParameter("id")));%>
+    <% User user = (User)request.getAttribute("user");%>
     <h2>UPDATE USER</h2>
     <form method = 'post' action="/UserUpdateServlet.do">
         <input type='hidden' name='id' value=<%=user.getId()%>>
@@ -16,5 +15,12 @@
         Email:<input type='text' name='email' value=<%=user.getEmail()%>><br>
         <input type='submit' value='UPDATE'>
     </form>
+    <%String msg= (String) request.getAttribute("error");%>
+    <%if (msg !=null) {%>
+    <%=msg%>
+    <%}%>
+    <br>
+    <br>
+    <a href="${pageContext.servletContext.contextPath}/UsersServlet.do">LIST OF ALL USERS</a>
     </body>
 </html>

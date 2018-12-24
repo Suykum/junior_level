@@ -4,7 +4,7 @@
     </head>
     <body>
         <h2>CREATE NEW USER</h2>
-        <form method = 'post' action="/UserCreateServlet.do">
+        <form method = 'post' action='${pageContext.servletContext.contextPath}/'>
             Name:<input type='text' name='name'><br>
             Login:<input type='text' name='login'><br>
             Email:<input type='text' name='email'><br>
@@ -15,6 +15,9 @@
             <%if (msg !=null) {%>
                 <%=msg%>
             <%}%>
+            <br>
+            <br>
+            <a href="${pageContext.servletContext.contextPath}/UsersServlet.do">LIST OF ALL USERS</a>
         </form>
     </body>
 </html>

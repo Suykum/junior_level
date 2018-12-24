@@ -30,8 +30,9 @@ public class DbStore implements Store {
             SOURCE.setMinIdle(Integer.parseInt(config.getProperty("minIdle")));
             SOURCE.setMaxIdle(Integer.parseInt(config.getProperty("maxIdle")));
             SOURCE.setMaxOpenPreparedStatements(Integer.parseInt(config.getProperty("maxPrepareStatment")));
+            createTable();
         } catch (IOException e) {
-            LOGGER.error(e.getMessage(),e);
+            LOGGER.error(e.getMessage(), e);
         }
 
     }

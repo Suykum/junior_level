@@ -19,9 +19,7 @@ public class ValidateUser {
     //private final Store memoryStore = MemoryStore.getMemoryStoreObject();
     private final DbStore memoryStore = DbStore.getInstance();
 
-    public void createTable() {
-        memoryStore.createTable();
-    }
+
     public String add(User user) {
 
         boolean result = false;

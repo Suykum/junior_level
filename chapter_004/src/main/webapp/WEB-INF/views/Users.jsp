@@ -6,8 +6,7 @@
         <title>Users JSP</title>
     </head>
     <body>
-    <%ValidateUser validateUserStore = ValidateUser.getValidateUserObject();%>
-    <%List<User> list = validateUserStore.findAll(); %>
+    <%List<User> list = (List<User>)request.getAttribute("users"); %>
     <table border="1">
     <tr>
         <th align='center'>ID</th>
@@ -23,11 +22,11 @@
         <td><%=u.getLogin()%></td>
         <td><%=u.getEmail()%></td>
         <td><%=u.getCreateDate()%></td>
-        <td><form method='get' action='<%=request.getContextPath()%>/UserUpdate.jsp'>
+        <td><form method='get' action='<%=request.getContextPath()%>/UserUpdateServlet.do'>
         <input type='hidden' name='id' value=<%=u.getId()%>>
         <input type='submit' value='Update'>
         </form></td>
-        <td><form method='get' action="${pageContext.servletContext.contextPath}/UserDeleteServlet.do">
+        <td><form method='get' action="<%=request.getContextPath()%>/UserDeleteServlet.do">
             <input type='hidden' name='id' value=<%=u.getId()%>>
             <input type='submit' value='Delete'>
         </form></td>
@@ -37,7 +36,7 @@
     </table>
     <br>
     <br>
-    <form method='get' action='<%=request.getContextPath()%>/UserCreate.jsp'>
+    <form method='get' action='<%=request.getContextPath()%>/'>
         <input type='submit' value='Create New User'>
         </form>
     </body>
