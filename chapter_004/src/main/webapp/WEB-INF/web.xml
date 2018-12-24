@@ -49,7 +49,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>UserCreateServlet</servlet-name>
-        <url-pattern>/UserCreateServlet.do</url-pattern>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
 
     <servlet>
