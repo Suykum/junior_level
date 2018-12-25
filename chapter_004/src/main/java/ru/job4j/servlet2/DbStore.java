@@ -54,7 +54,7 @@ public class DbStore implements Store {
 
     @Override
     public boolean add(User user) {
-        boolean addResult = false;
+        int addResult = 0;
         String sql = "INSERT INTO users (name, login, email) VALUES (?, ?, ?)";
         try (Connection connection = SOURCE.getConnection();
              PreparedStatement pst = connection.prepareStatement(sql)
@@ -62,11 +62,11 @@ public class DbStore implements Store {
             pst.setString(1, user.getName());
             pst.setString(2, user.getLogin());
             pst.setString(3, user.getEmail());
-            addResult = pst.execute();
+            addResult = pst.executeUpdate();
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
         }
-        return addResult;
+        return addResult > 0;
     }
 
     @Override
