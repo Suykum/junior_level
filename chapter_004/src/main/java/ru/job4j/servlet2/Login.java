@@ -4,37 +4,33 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.UUID;
 
-public class UserUpdateServlet extends HttpServlet {
+public class Login extends HttpServlet {
     private ValidateUser validateUserStore = ValidateUser.getValidateUserObject();
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
-        User user = validateUserStore.findById(UUID.fromString(req.getParameter("id")));
-        req.setAttribute("user", user);
-        req.getRequestDispatcher("WEB-INF/views/UserUpdate.jsp").forward(req, resp);
-
+        //validateUserStore.add(new User("Anna", "anna", "anna@gmail.com", "aaa", Role.ADMIN));
+        req.getRequestDispatcher("WEB-INF/views/Login.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        String id = req.getParameter("id");
-        String name = req.getParameter("name");
+        resp.setContentType("text/html");
         String login = req.getParameter("login");
-        String email = req.getParameter("email");
         String password = req.getParameter("password");
-        Role.Roles role = Role.Roles.valueOf(req.getParameter("role").toUpperCase());
-        String update = validateUserStore.update(UUID.fromString(id), new User(name, login, email, password, role));
-        if (!update.contains("cannot")) {
+        boolean permited = validateUserStore.loginPermit(login, password);
+        if (permited) {
+            HttpSession session = req.getSession();
+            synchronized (session) {
+                session.setAttribute("login", login);
+                session.setAttribute("role", validateUserStore.getRole(login));
+            }
             resp.sendRedirect(String.format("%s/", req.getContextPath()));
         } else {
-            req.setAttribute("error", "User cannot be updated");
+            req.setAttribute("error", "Invalid user");
             doGet(req, resp);
-
         }
     }
 }

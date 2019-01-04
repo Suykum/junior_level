@@ -10,20 +10,26 @@ public class User {
     private String login;
     private String email;
     private Date createDate;
+    private String password;
+    private Role.Roles role;
 
-    public User(String name, String login, String email) {
+    public User(String name, String login, String email, String password, Role.Roles role) {
         this.setName(name);
         this.setLogin(login);
         this.setEmail(email);
         createDate = new Date(System.currentTimeMillis());
+        this.setPassword(password);
+        this.setRole(role);
     }
 
-    public User(UUID id, String name, String login, String email, Date date) {
+    public User(UUID id, String name, String login, String email, String password, Date date, Role.Roles role) {
         this.id = id;
         this.name = name;
         this.login = login;
         this.email = email;
         this.createDate = date;
+        this.setPassword(password);
+        this.setRole(role);
 
     }
 
@@ -65,6 +71,22 @@ public class User {
 
     public void setCreateDate(Date date) {
         createDate = date;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Role.Roles getRole() {
+        return role;
+    }
+
+    public void setRole(Role.Roles role) {
+        this.role = role;
     }
 
     @Override

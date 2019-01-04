@@ -19,7 +19,6 @@ public class ValidateUser {
     //private final Store memoryStore = MemoryStore.getMemoryStoreObject();
     private final DbStore memoryStore = DbStore.getInstance();
 
-
     public String add(User user) {
 
         boolean result = false;
@@ -104,5 +103,28 @@ public class ValidateUser {
                 throw new UserExeption("User with " + email + " email already exist");
             }
         }
+    }
+
+    public boolean loginPermit(String login, String password) {
+        boolean exists = false;
+        List<User> users = findAll();
+        for (User u : users) {
+            if (u.getLogin().equals(login) && u.getPassword().equals(password)) {
+                exists = true;
+                break;
+            }
+        }
+        return exists;
+    }
+
+    public Role.Roles getRole(String login) {
+        Role.Roles role = null;
+        List<User> users = findAll();
+        for (User u : users) {
+            if (u.getLogin().equals(login)) {
+                role = u.getRole();
+            }
+        }
+        return role;
     }
 }

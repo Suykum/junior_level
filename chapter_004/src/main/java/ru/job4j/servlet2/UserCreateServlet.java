@@ -22,10 +22,12 @@ public class UserCreateServlet extends HttpServlet {
         String name = req.getParameter("name");
         String login = req.getParameter("login");
         String email = req.getParameter("email");
-        User user = new User(name, login, email);
+        String password = req.getParameter("password");
+        String role = req.getParameter("role");
+        User user = new User(name, login, email, password, Role.Roles.valueOf(role.toUpperCase()));
         String add = validateUserStore.add(user);
         if (!add.contains("Cannot")) {
-            resp.sendRedirect(String.format("%s/UsersServlet.do", req.getContextPath()));
+            resp.sendRedirect(String.format("%s/", req.getContextPath()));
         } else {
             req.setAttribute("error", "Cannot be added");
             doGet(req, resp);

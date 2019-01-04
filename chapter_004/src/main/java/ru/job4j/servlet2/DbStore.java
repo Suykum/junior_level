@@ -42,7 +42,8 @@ public class DbStore implements Store {
     }
 
     public void createTable() {
-        String sql = "CREATE TABLE IF NOT EXISTS users(id UUID default uuid_generate_v4() primary key, name varchar(50), login varchar(50), email varchar(50), create_d date default now())";
+        String sql = "CREATE TABLE IF NOT EXISTS users(id UUID default uuid_generate_v4() primary key, name varchar(50),"
+                + " login varchar(50), email varchar(50), password varchar(50), create_d date default now(), role varchar(30))";
         try (Connection connection = SOURCE.getConnection();
              PreparedStatement pst = connection.prepareStatement(sql)
         ) {
@@ -55,13 +56,15 @@ public class DbStore implements Store {
     @Override
     public boolean add(User user) {
         int addResult = 0;
-        String sql = "INSERT INTO users (name, login, email) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO users (name, login, email, password, role) VALUES (?, ?, ?, ?, ?)";
         try (Connection connection = SOURCE.getConnection();
              PreparedStatement pst = connection.prepareStatement(sql)
         ) {
             pst.setString(1, user.getName());
             pst.setString(2, user.getLogin());
             pst.setString(3, user.getEmail());
+            pst.setString(4, user.getPassword());
+            pst.setString(5, String.valueOf(user.getRole()));
             addResult = pst.executeUpdate();
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
@@ -72,14 +75,16 @@ public class DbStore implements Store {
     @Override
     public boolean update(UUID id, User user) {
         int updateResult = 0;
-        String sql = "UPDATE users SET name = ?, login = ?, email = ? WHERE id = ?";
+        String sql = "UPDATE users SET name = ?, login = ?, email = ?, password = ?, role = ? WHERE id = ?";
         try (Connection connection = SOURCE.getConnection();
              PreparedStatement pst = connection.prepareStatement(sql)
         ) {
             pst.setString(1, user.getName());
             pst.setString(2, user.getLogin());
             pst.setString(3, user.getEmail());
-            pst.setObject(4, id);
+            pst.setString(4, user.getPassword());
+            pst.setString(5, String.valueOf(user.getRole()));
+            pst.setObject(6, id);
             updateResult = pst.executeUpdate();
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
@@ -112,7 +117,8 @@ public class DbStore implements Store {
            ResultSet rs = pst.executeQuery();
             while (rs.next()) {
                 list.add(new User(UUID.fromString(rs.getString("id")), rs.getString("name"), rs.getString("login"),
-                        rs.getString("email"), rs.getDate("create_d")));
+                        rs.getString("email"), rs.getString("password"), rs.getDate("create_d"),
+                        Role.Roles.valueOf(rs.getString("role"))));
             }
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
@@ -131,7 +137,7 @@ public class DbStore implements Store {
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
                 user = new User(UUID.fromString(rs.getString("id")), rs.getString("name"), rs.getString("login"),
-                        rs.getString("email"), rs.getDate("create_d"));
+                        rs.getString("email"), rs.getString("password"), rs.getDate("create_d"), Role.Roles.valueOf(rs.getString("role")));
             }
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
