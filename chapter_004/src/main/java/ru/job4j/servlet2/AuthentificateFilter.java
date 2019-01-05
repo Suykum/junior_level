@@ -16,16 +16,13 @@ public class AuthentificateFilter implements Filter {
     @Override
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) req;
-
         if (request.getRequestURI().contains("/login")) {
             chain.doFilter(req, resp);
         } else {
             HttpSession session = request.getSession();
-            synchronized (session) {
-                if (session.getAttribute("login") == null) {
-                    ((HttpServletResponse) resp).sendRedirect(String.format("%s/login.do", request.getContextPath()));
-                    return;
-                }
+            if (session.getAttribute("login") == null) {
+                ((HttpServletResponse) resp).sendRedirect(String.format("%s/login.do", request.getContextPath()));
+                return;
             }
             chain.doFilter(req, resp);
         }
