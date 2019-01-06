@@ -1,0 +1,50 @@
+package ru.job4j.servlet2;
+
+import org.jsoup.helper.Validate;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+
+public class ValidateStub extends ValidateUser {
+
+
+    private ConcurrentHashMap<UUID, User> store = new ConcurrentHashMap<>();
+    @Override
+    public String add(User user) {
+        UUID id = UUID.randomUUID();
+        user.setId(id);
+        User u = store.putIfAbsent(id, user);
+        return u == null ? "New user added" : "Cannot be added";
+    }
+
+    @Override
+    public String update(UUID id, User user) {
+        boolean result = false;
+        User u = findById(id);
+        if (u != null) {
+            user.setCreateDate(u.getCreateDate());
+            user.setId(id);
+            result = store.replace(id, u, user);
+        }
+        return result ? "User is updated" : "User cannot be updated";
+    }
+
+    @Override
+    public String delete(UUID id) {
+       boolean deleteResult = store.remove(id, findById(id));
+       return deleteResult ? "User deleted" : "User with id " + id + " not exist";
+    }
+
+    @Override
+    public List findAll() {
+        return new ArrayList<>(store.values());
+    }
+
+    @Override
+    public User findById(UUID id) {
+        return store.get(id);
+    }
+
+}

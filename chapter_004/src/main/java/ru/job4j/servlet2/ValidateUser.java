@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 public class ValidateUser {
     private static ValidateUser validateUserObject = new ValidateUser();
     private static final Logger LOGGER = Logger.getLogger(ValidateUser.class);
-    private ValidateUser() {
+    protected ValidateUser() {
     }
 
     public static ValidateUser getValidateUserObject() {
