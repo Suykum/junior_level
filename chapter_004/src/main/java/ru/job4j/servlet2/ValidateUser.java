@@ -7,24 +7,25 @@ import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ValidateUser {
-    private static ValidateUser validateUserObject = new ValidateUser();
+public class ValidateUser implements Validate{
     private static final Logger LOGGER = Logger.getLogger(ValidateUser.class);
-    protected ValidateUser() {
-    }
 
-    public static ValidateUser getValidateUserObject() {
+    private static Validate validateUserObject = new ValidateUser();
+    private ValidateUser() {
+    }
+    public static Validate getValidateUserObject() {
         return validateUserObject;
     }
-    //private final Store memoryStore = MemoryStore.getMemoryStoreObject();
-    private final DbStore memoryStore = DbStore.getInstance();
+
+    //private final Store store = MemoryStore.getMemoryStoreObject();
+    private final Store store = DbStore.getInstance();
 
     public String add(User user) {
 
         boolean result = false;
         try {
             if (user.getLogin() != null && user.getEmail() != null && !isLoginEmailExist(user.getLogin(), user.getEmail()) && emailValidation(user.getEmail())) {
-                result = memoryStore.add(user);
+                result = store.add(user);
             }
         } catch (UserExeption e) {
             LOGGER.error(e.getMessage(), e);
@@ -39,7 +40,7 @@ public class ValidateUser {
         try {
             if (user.getLogin() != null && user.getEmail() != null
                     && !isLoginEmailExistForUpdate(id, user.getLogin(), user.getEmail()) && emailValidation(user.getEmail())) {
-                updateResult = memoryStore.update(id, user);
+                updateResult = store.update(id, user);
             }
         } catch (UserExeption e) {
             LOGGER.error(e.getMessage(), e);
@@ -48,18 +49,18 @@ public class ValidateUser {
     }
 
     public String delete(UUID id) {
-        boolean deleteResult = memoryStore.delete(id);
+        boolean deleteResult = store.delete(id);
         return deleteResult ? "User deleted" : "User with id " + id + " not exist";
     }
 
 
     public List findAll() {
-        return memoryStore.findAll();
+        return store.findAll();
     }
 
 
     public User findById(UUID id) {
-        User u = memoryStore.findById(id);
+        User u = store.findById(id);
         return u;
     }
 
@@ -76,7 +77,7 @@ public class ValidateUser {
 
     private boolean isLoginEmailExist(String login, String email) throws UserExeption {
         boolean r = false;
-        List<User> list = memoryStore.findAll();
+        List<User> list = store.findAll();
         checkList(list, login, email);
         return r;
     }
@@ -84,9 +85,9 @@ public class ValidateUser {
 
     private boolean isLoginEmailExistForUpdate(UUID id, String login, String email) throws UserExeption {
         boolean r = false;
-        User user = memoryStore.findById(id);
+        User user = store.findById(id);
         if (user != null) {
-            List<User> list = memoryStore.findAll();
+            List<User> list = store.findAll();
             list.remove(user);
             checkList(list, login, email);
         }

@@ -1,16 +1,13 @@
 package ru.job4j.servlet2;
 
-import org.jsoup.helper.Validate;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class ValidateStub extends ValidateUser {
+public class ValidateStub implements Validate {
 
-
-    private ConcurrentHashMap<UUID, User> store = new ConcurrentHashMap<>();
+    private Map<UUID, User> store = new HashMap<>();
     @Override
     public String add(User user) {
         UUID id = UUID.randomUUID();
@@ -45,6 +42,16 @@ public class ValidateStub extends ValidateUser {
     @Override
     public User findById(UUID id) {
         return store.get(id);
+    }
+
+    @Override
+    public boolean loginPermit(String login, String password) {
+        return false;
+    }
+
+    @Override
+    public Role.Roles getRole(String login) {
+        return null;
     }
 
 }

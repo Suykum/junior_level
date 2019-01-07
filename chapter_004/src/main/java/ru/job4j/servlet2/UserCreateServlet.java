@@ -8,7 +8,7 @@ import java.io.IOException;
 
 
 public class UserCreateServlet extends HttpServlet {
-    private ValidateUser validateUserStore = ValidateUser.getValidateUserObject();
+    private Validate validateUserStore = ValidateUser.getValidateUserObject();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");

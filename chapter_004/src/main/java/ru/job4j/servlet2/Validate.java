@@ -9,4 +9,6 @@ public interface Validate {
     String delete(UUID id);
     List findAll();
     User findById(UUID id);
+    boolean loginPermit(String login, String password);
+    Role.Roles getRole(String login);
 }

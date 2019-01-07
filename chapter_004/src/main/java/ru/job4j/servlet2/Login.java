@@ -8,10 +8,10 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class Login extends HttpServlet {
-    private ValidateUser validateUserStore = ValidateUser.getValidateUserObject();
+    private Validate validateUserStore = ValidateUser.getValidateUserObject();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //validateUserStore.add(new User("Anna", "anna", "anna@gmail.com", "aaa", Role.ADMIN));
+        validateUserStore.add(new User("Anna", "anna", "anna@gmail.com", "aaa", Role.Roles.ADMIN));
         req.getRequestDispatcher("WEB-INF/views/Login.jsp").forward(req, resp);
     }
 

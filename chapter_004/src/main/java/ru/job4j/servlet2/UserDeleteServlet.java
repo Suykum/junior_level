@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.UUID;
 
 public class UserDeleteServlet extends HttpServlet {
-    private ValidateUser validateUserStore = ValidateUser.getValidateUserObject();
+    private Validate validateUserStore = ValidateUser.getValidateUserObject();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String id = req.getParameter("id");
