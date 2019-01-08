@@ -8,24 +8,25 @@
     <!--link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script-->
+    <script  src ="scripts/scripts.js"></script>
 </head>
 <body>
 <h2>USER DETAILS</h2>
-<form method = 'post' action='/...'>
-    <label>Name:</label>
-    <input type='text' name='name'><br>
+<form action='index.html'>
+    <label for="name">Name:</label>
+    <input type='text' name='name' id="name"><br>
 
-    <label>Last Name:</label>
-    <input type='text' name='lastname'><br>
+    <label for="lastname">Last Name:</label>
+    <input type='text' name='lastname' id="lastname"><br>
 
     <label>Sex:</label>
-    <input type="radio" name="sex" value="male">Male
+    <input type="radio" name="sex" value="male" checked="checked">Male
     <input type="radio" name="sex" value="female">Female<br>
 
-    <label>Description:</label>
-    <textarea name="desc"></textarea><br>
+    <label for="description">Description:</label>
+    <textarea name="desc" id="description"></textarea><br>
     <label>&nbsp;</label>
-    <input type='submit' value='Submit'><br><br>
+    <input type='submit' value='Submit' onclick="return validate();"><br><br>
 
     <table>
         <tr>
