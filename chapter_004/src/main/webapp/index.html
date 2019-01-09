@@ -5,36 +5,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/main2.css" type="text/css">
-    <!--link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!--link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script  src ="scripts/scripts.js"></script>
 </head>
 <body>
 <h2>USER DETAILS</h2>
-<form action='index.html'>
+<form action='index.html' id="myForm">
     <label for="name">Name:</label>
     <input type='text' name='name' id="name"><br>
 
     <label for="lastname">Last Name:</label>
     <input type='text' name='lastname' id="lastname"><br>
 
-    <label>Sex:</label>
-    <input type="radio" name="sex" value="male" checked="checked">Male
-    <input type="radio" name="sex" value="female">Female<br>
+    <label>Gender:</label>
+    <input type="radio" name="gender" value="male" checked="checked">Male
+    <input type="radio" name="gender" value="female">Female<br>
 
     <label for="description">Description:</label>
-    <textarea name="desc" id="description"></textarea><br>
-    <label>&nbsp;</label>
-    <input type='submit' value='Submit' onclick="return validate();"><br><br>
+    <textarea name="desc" id="description"></textarea><br><br>
 
-    <table>
-        <tr>
-            <td>Name</td>
-            <td>Last Name</td>
-            <td>Sex</td>
-            <td>Description</td>
-        </tr>
+    <label>&nbsp;</label>
+    <input type='button' value='Add Row' onclick="return addRow();"><br><br>
+    <table id="table">
+        <tbody>
+            <tr>
+                <td>Name</td>
+                <td>Last Name</td>
+                <td>Gender</td>
+                <td>Description</td>
+            </tr>
+        </tbody>
     </table>
 
 </form>
