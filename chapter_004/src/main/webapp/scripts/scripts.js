@@ -59,11 +59,14 @@ function loadData() {
 }
 function parseResponse(data) {
     console.log(data);
-    var map = JSON.parse(data.responseText);
-        $.each(map, function (key, value) {
+    clearTable();
+        $.each(data, function (key, value) {
         $('#table tr:last').after('<tr><td>' + value.name + '</td><td>' + value.lastName + '</td><td>' + value.gender + '</td><td>' + value.description + '</td></tr>');
     });
-    console.log(map.size());
+
+}
+function clearTable() {
+    $("#table tr").not(":first").remove();
 }
 
 
