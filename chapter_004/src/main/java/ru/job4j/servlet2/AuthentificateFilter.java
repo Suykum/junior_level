@@ -16,7 +16,7 @@ public class AuthentificateFilter implements Filter {
     @Override
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) req;
-        if (request.getRequestURI().contains("/login")) {
+        if (request.getRequestURI().contains("/login") || request.getRequestURI().contains("/Country")) {
             chain.doFilter(req, resp);
         } else {
             HttpSession session = request.getSession();

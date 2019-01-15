@@ -28,7 +28,9 @@ public class UserUpdateServlet extends HttpServlet {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
         Role.Roles role = Role.Roles.valueOf(req.getParameter("role").toUpperCase());
-        String update = validateUserStore.update(UUID.fromString(id), new User(name, login, email, password, role));
+        String country = req.getParameter("country");
+        String city = req.getParameter("city");
+        String update = validateUserStore.update(UUID.fromString(id), new User(name, login, email, password, role, country, city));
         if (!update.contains("cannot")) {
             resp.sendRedirect(String.format("%s/", req.getContextPath()));
         } else {

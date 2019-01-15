@@ -7,7 +7,7 @@ import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ValidateUser implements Validate{
+public class ValidateUser implements Validate {
     private static final Logger LOGGER = Logger.getLogger(ValidateUser.class);
 
     private static Validate validateUserObject = new ValidateUser();
@@ -127,5 +127,13 @@ public class ValidateUser implements Validate{
             }
         }
         return role;
+    }
+
+    public List<String> getCountries() {
+        return store.getCountries();
+    }
+
+    public List<String> getCities(String country) {
+        return store.getCitiesByCountry(country);
     }
 }

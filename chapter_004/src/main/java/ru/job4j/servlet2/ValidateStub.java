@@ -54,4 +54,14 @@ public class ValidateStub implements Validate {
         return null;
     }
 
+    @Override
+    public List<String> getCountries() {
+        return null;
+    }
+
+    @Override
+    public List<String> getCities(String country) {
+        return null;
+    }
+
 }

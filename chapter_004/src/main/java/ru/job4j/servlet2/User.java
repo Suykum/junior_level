@@ -12,17 +12,21 @@ public class User {
     private Date createDate;
     private String password;
     private Role.Roles role;
+    private String country;
+    private String city;
 
-    public User(String name, String login, String email, String password, Role.Roles role) {
+    public User(String name, String login, String email, String password, Role.Roles role, String country, String city) {
         this.setName(name);
         this.setLogin(login);
         this.setEmail(email);
         createDate = new Date(System.currentTimeMillis());
         this.setPassword(password);
         this.setRole(role);
+        this.setCountry(country);
+        this.setCity(city);
     }
 
-    public User(UUID id, String name, String login, String email, String password, Date date, Role.Roles role) {
+    public User(UUID id, String name, String login, String email, String password, Date date, Role.Roles role, String country, String city) {
         this.id = id;
         this.name = name;
         this.login = login;
@@ -30,6 +34,8 @@ public class User {
         this.createDate = date;
         this.setPassword(password);
         this.setRole(role);
+        this.setCountry(country);
+        this.setCity(city);
 
     }
 
@@ -89,6 +95,22 @@ public class User {
         this.role = role;
     }
 
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
     @Override
     public boolean equals(Object o) {
         User user = (User) o;
@@ -105,4 +127,6 @@ public class User {
         return "User id: " + this.id + ", Name: " + name + ", Login: " + this.login
                 + ", Email: " + this.email + ", Created date: " + this.createDate;
     }
+
+
 }

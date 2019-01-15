@@ -11,8 +11,9 @@ public class Login extends HttpServlet {
     private Validate validateUserStore = ValidateUser.getValidateUserObject();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        validateUserStore.add(new User("Anna", "anna", "anna@gmail.com", "aaa", Role.Roles.ADMIN));
-        req.getRequestDispatcher("WEB-INF/views/Login.jsp").forward(req, resp);
+        //validateUserStore.add(new User("Anna", "anna", "anna@gmail.com", "aaa", Role.Roles.ADMIN, "Turkey", "Corum"));
+        //validateUserStore.add(new User("Janna", "janna", "janna@gmail.com", "jjj", Role.Roles.USER, "Kyrgyzstan", "Bishkek"));
+                req.getRequestDispatcher("WEB-INF/views/Login.jsp").forward(req, resp);
     }
 
     @Override

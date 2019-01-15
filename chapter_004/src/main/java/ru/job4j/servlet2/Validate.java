@@ -11,4 +11,6 @@ public interface Validate {
     User findById(UUID id);
     boolean loginPermit(String login, String password);
     Role.Roles getRole(String login);
+    List<String> getCountries();
+    List<String> getCities(String country);
 }

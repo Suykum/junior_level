@@ -17,6 +17,8 @@
         <th>Email</th>
         <th>CreatedDate</th>
         <th>Role</th>
+        <th>Country</th>
+        <th>City</th>
     </tr>
         <c:forEach var="user" items="${users}">
     <tr>
@@ -26,6 +28,8 @@
         <td>${user.email}</td>
         <td>${user.createDate}</td>
         <td>${user.role}</td>
+        <td>${user.country}</td>
+        <td>${user.city}</td>
         <c:if test="${sessionScope.role == 'ADMIN' || sessionScope.login == user.login}">
         <td><form method='get' action='${pageContext.servletContext.contextPath}/UserUpdateServlet.do'>
             <input type='hidden' name='id' value=${user.id}>

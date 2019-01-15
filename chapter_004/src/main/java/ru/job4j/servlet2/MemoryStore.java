@@ -1,6 +1,7 @@
 package ru.job4j.servlet2;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -49,6 +50,16 @@ public class MemoryStore implements Store {
     @Override
     public User findById(UUID id) {
         return usersList.get(id);
+    }
+
+    @Override
+    public List<String> getCountries() {
+        return null;
+    }
+
+    @Override
+    public List<String> getCitiesByCountry(String country) {
+        return null;
     }
 
 }

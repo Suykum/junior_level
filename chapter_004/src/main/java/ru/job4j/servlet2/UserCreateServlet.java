@@ -24,7 +24,9 @@ public class UserCreateServlet extends HttpServlet {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
         String role = req.getParameter("role");
-        User user = new User(name, login, email, password, Role.Roles.valueOf(role.toUpperCase()));
+        String country = req.getParameter("country");
+        String city = req.getParameter("city");
+        User user = new User(name, login, email, password, Role.Roles.valueOf(role.toUpperCase()), country, city);
         String add = validateUserStore.add(user);
         if (!add.contains("Cannot")) {
             resp.sendRedirect(String.format("%s/", req.getContextPath()));
