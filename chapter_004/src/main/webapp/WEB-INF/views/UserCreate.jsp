@@ -29,8 +29,8 @@
             <select id="country" name="country" onchange="getCity(this.value)" size="10" style="width: 13em">
                 <option value="">--Select Country--</option>
             </select>
-            <input type='button' value='List Countries' onclick="return getCountry();"><br>
 
+            <br>
             <label for="newCountry">&nbsp;</label>
             <input type="text" name="newCountry" id="newCountry">
             <input type='button' value='Add New Country' onclick="return addCountry();"><br>

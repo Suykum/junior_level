@@ -1,4 +1,7 @@
 
+$(document).ready(function () {
+    getCountry();
+});
 function validateUserInput() {
     var name = document.getElementById("name").value;
     var login = document.getElementById("login").value;
