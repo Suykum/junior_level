@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Cinema</title>
+</head>
+<body>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="scripts/cinema.js"></script>
+<div class="container">
+    <div class="row pt-3">
+        <h4>
+            Бронирование месте на сеанс
+        </h4>
+    </div>
+    <form action="/payment.do" method="get">
+        <table class="table table-bordered" id="table">
+            <thead>
+            <tr>
+                <th style="width: 120px;">Ряд / Место</th>
+                <th>1</th>
+                <th>2</th>
+                <th>3</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th>1</th>
+                <td id="11"><input type="radio" name="place" value="11" id="place11"> Ряд 1, Место 1</td>
+                <td id="12"><input type="radio" name="place" value="12" id="place12"> Ряд 1, Место 2</td>
+                <td id="13"><input type="radio" name="place" value="13" id="place13"> Ряд 1, Место 3</td>
+            </tr>
+            <tr>
+                <th>2</th>
+                <td id="21"><input type="radio" name="place" value="21" id="place21"> Ряд 2, Место 1</td>
+                <td id="22"><input type="radio" name="place" value="22" id="place22"> Ряд 2, Место 2</td>
+                <td id="23"><input type="radio" name="place" value="23" id="place23"> Ряд 2, Место 3</td>
+            </tr>
+            <tr>
+                <th>3</th>
+                <td id="31"><input type="radio" name="place" value="31" id="place31"> Ряд 3, Место 1</td>
+                <td id="32"><input type="radio" name="place" value="32" id="place32"> Ряд 3, Место 2</td>
+                <td id="33"><input type="radio" name="place" value="33" id="place33"> Ряд 3, Место 3</td>
+            </tr>
+            </tbody>
+        </table>
+<div class="row float-right">
+    <button type="submit" class="btn btn-success" onclick="return inputValidate();">Оплатить</button>
+</div>
+</form>
+    <form action="/hall.do" method="post">
+        <div>
+            <input type="hidden" name="hall" value="reset">
+            <button type="submit" class="btn btn-success">Закрыть сеанс</button>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

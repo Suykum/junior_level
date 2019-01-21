@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
          http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
          version="2.4">
-    <filter>
+    <!--filter>
         <filter-name>Authenticate</filter-name>
         <filter-class>ru.job4j.servlet2.AuthentificateFilter</filter-class>
 
@@ -138,6 +138,26 @@
     <servlet-mapping>
         <servlet-name>jsonServlet</servlet-name>
         <url-pattern>/jsonServlet.do</url-pattern>
+    </servlet-mapping-->
+
+    <servlet>
+        <servlet-name>hall</servlet-name>
+        <servlet-class>ru.job4j.cinema.HallServlet</servlet-class>
+
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>hall</servlet-name>
+        <url-pattern>/hall.do</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>payment</servlet-name>
+        <servlet-class>ru.job4j.cinema.PaymentServlet</servlet-class>
+
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>payment</servlet-name>
+        <url-pattern>/payment.do</url-pattern>
     </servlet-mapping>
 
 </web-app>
