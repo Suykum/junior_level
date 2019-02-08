@@ -10,14 +10,18 @@ import java.util.regex.Pattern;
 public class ValidateUser implements Validate {
     private static final Logger LOGGER = Logger.getLogger(ValidateUser.class);
 
-    private static Validate validateUserObject = new ValidateUser();
     private ValidateUser() {
     }
     public static Validate getValidateUserObject() {
-        return validateUserObject;
+        return Holder.INSTANCE;
     }
 
+
+
     //private final Store store = MemoryStore.getMemoryStoreObject();
+    private static class Holder {
+        private static final Validate INSTANCE = new ValidateUser();
+    }
     private final Store store = DbStore.getInstance();
 
     public String add(User user) {

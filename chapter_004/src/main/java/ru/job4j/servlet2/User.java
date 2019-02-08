@@ -39,6 +39,14 @@ public class User {
 
     }
 
+    public User(String name, String login, String mail, String password, Role.Roles role) {
+        this.name = name;
+        this.login = login;
+        this.email = getEmail();
+        this.setPassword(password);
+        this.setRole(role);
+    }
+
     public UUID getId() {
         return id;
     }

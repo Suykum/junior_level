@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import javax.servlet.RequestDispatcher;
@@ -17,6 +18,7 @@ import static org.junit.Assert.*;
 import static org.powermock.api.mockito.PowerMockito.mock;
 import static org.powermock.api.mockito.PowerMockito.when;
 
+@PowerMockIgnore("javax.management.*")
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(ValidateUser.class)
 public class UserServletTest {
@@ -43,8 +45,8 @@ public class UserServletTest {
     }
 
     @Test
-    public void whenUpdateUser() throws ServletException, IOException{
-        User user = new User("Anna", "anna", "anna@gmail.com", "aaa", Role.Roles.ADMIN);
+    public void whenUpdateUser() throws ServletException, IOException {
+        User user = new User("Anna", "anna", "anna@gmail.com", "aaa", Role.Roles.ADMIN, "Turkey", "Corum");
         validate.add(user);
         List<User> list = validate.findAll();
         when(req.getParameter("id")).thenReturn(String.valueOf(validate.findById(list.get(0).getId()).getId()));
@@ -60,8 +62,8 @@ public class UserServletTest {
 
     @Test
     public void whenUserDeleted() throws ServletException, IOException {
-        User user1 = new User("Anna", "anna", "anna@gmail.com", "aaa", Role.Roles.ADMIN);
-        User user2 = new User("Bob", "bob", "bob@gmail.com", "bbb", Role.Roles.USER);
+        User user1 = new User("Anna", "anna", "anna@gmail.com", "aaa", Role.Roles.ADMIN, "Kyrgyzstan", "Bishkek");
+        User user2 = new User("Bob", "bob", "bob@gmail.com", "bbb", Role.Roles.USER, "Turkey", "Ankara");
         validate.add(user1);
         validate.add(user2);
         List<User> list = validate.findAll();
@@ -75,8 +77,8 @@ public class UserServletTest {
     public void whenGetAllUsers() throws ServletException, IOException {
         RequestDispatcher dispatcher = mock(RequestDispatcher.class);
         Mockito.when(req.getRequestDispatcher("WEB-INF/views/Users.jsp")).thenReturn(dispatcher);
-        User user1 = new User("Anna", "anna", "anna@gmail.com", "aaa", Role.Roles.ADMIN);
-        User user2 = new User("Bob", "bob", "bob@gmail.com", "bbb", Role.Roles.USER);
+        User user1 = new User("Anna", "anna", "anna@gmail.com", "aaa", Role.Roles.ADMIN, "Kyrgyzstan", "Bishkek");
+        User user2 = new User("Bob", "bob", "bob@gmail.com", "bbb", Role.Roles.USER, "Turkey", "Ankara");
         validate.add(user1);
         validate.add(user2);
 
@@ -86,6 +88,5 @@ public class UserServletTest {
         //assertThat(list.size(), is(2));
 
     }
-
 
 }
